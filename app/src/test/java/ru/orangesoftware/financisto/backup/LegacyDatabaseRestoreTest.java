@@ -15,6 +15,7 @@ import org.junit.Test;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import ru.orangesoftware.financisto.db.AbstractDbTest;
@@ -28,7 +29,10 @@ import ru.orangesoftware.financisto.model.TransactionInfo;
 import ru.orangesoftware.financisto.utils.FileUtils;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class LegacyDatabaseRestoreTest extends AbstractDbTest {
 
@@ -272,7 +276,7 @@ public class LegacyDatabaseRestoreTest extends AbstractDbTest {
     private String createBackupFile(String fileContent) throws IOException {
         String fileName = "backup_" + System.currentTimeMillis() + ".backup";
         FileOutputStream out = new FileOutputStream(new File(Export.getBackupFolder(getContext()), fileName));
-        out.write(fileContent.getBytes());
+        out.write(fileContent.getBytes(StandardCharsets.UTF_8));
         out.flush();
         out.close();
         return fileName;
