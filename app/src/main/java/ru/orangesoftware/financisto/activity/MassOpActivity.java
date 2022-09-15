@@ -26,14 +26,11 @@ public class MassOpActivity extends BlotterActivity {
 
 	@Override
 	protected void internalOnCreate(Bundle savedInstanceState) {
-		bFilter = (ImageButton)findViewById(R.id.bFilter);
-		bFilter.setOnClickListener(new OnClickListener(){
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(MassOpActivity.this, BlotterFilterActivity.class);
-				blotterFilter.toIntent(intent);
-				startActivityForResult(intent, FILTER_REQUEST);
-			}
+		bFilter = findViewById(R.id.bFilter);
+		bFilter.setOnClickListener(v -> {
+			Intent intent = new Intent(MassOpActivity.this, BlotterFilterActivity.class);
+			blotterFilter.toIntent(intent);
+			startActivityForResult(intent, FILTER_REQUEST);
 		});
 		ImageButton bCheckAll = (ImageButton)findViewById(R.id.bCheckAll);
 		bCheckAll.setOnClickListener(new OnClickListener(){

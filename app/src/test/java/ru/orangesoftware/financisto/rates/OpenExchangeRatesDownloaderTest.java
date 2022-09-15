@@ -1,16 +1,16 @@
 package ru.orangesoftware.financisto.rates;
 
 import org.junit.Test;
+
 import java.util.List;
+
 import ru.orangesoftware.financisto.utils.FileUtils;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class OpenExchangeRatesDownloaderTest extends AbstractRatesDownloaderTest {
 
-    private OpenExchangeRatesDownloader openRates = new OpenExchangeRatesDownloader(client, "MY_APP_ID");
+    OpenExchangeRatesDownloader openRates = new OpenExchangeRatesDownloader(client, "MY_APP_ID");
 
     @Override
     ExchangeRateProvider service() {

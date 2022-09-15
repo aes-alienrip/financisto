@@ -1,13 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2010 Denis Solonenko.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v2.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- * <p/>
- * Contributors:
- * Denis Solonenko - initial API and implementation
- ******************************************************************************/
 package ru.orangesoftware.financisto.backup;
 
 import android.content.Context;
@@ -45,7 +35,7 @@ public final class Backup {
 
     public static String[] listBackups(Context context) {
         File backupPath = Export.getBackupFolder(context);
-        String[] files = backupPath.list((dir, filename) -> filename.endsWith(".backup"));
+        String[] files = backupPath.list();
         if (files != null) {
             Arrays.sort(files, (s1, s2) -> s2.compareTo(s1));
             return files;

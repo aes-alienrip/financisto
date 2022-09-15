@@ -21,7 +21,7 @@ import ru.orangesoftware.financisto.utils.StringUtil;
  * Date: 2/16/13
  * Time: 6:27 PM
  */
-
+//@NotThreadSafe
 public class OpenExchangeRatesDownloader extends AbstractMultipleRatesDownloader {
 
     private static final String TAG = OpenExchangeRatesDownloader.class.getSimpleName();

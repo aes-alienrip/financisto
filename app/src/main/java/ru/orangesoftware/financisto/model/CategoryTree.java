@@ -14,8 +14,6 @@ import java.util.*;
 
 import android.database.Cursor;
 
-import org.jetbrains.annotations.NotNull;
-
 public class CategoryTree<T extends CategoryEntity<T>> implements Iterable<T> {
 	
 	private final ArrayList<T> roots;
@@ -55,7 +53,7 @@ public class CategoryTree<T extends CategoryEntity<T>> implements Iterable<T> {
         roots.add(0, category);
     }
 
-    public interface NodeCreator<T> {
+    public static interface NodeCreator<T> {
 
         T createNode(Cursor c);
     }
@@ -74,7 +72,6 @@ public class CategoryTree<T extends CategoryEntity<T>> implements Iterable<T> {
 		}
 	}
 
-	@NotNull
 	@Override
 	public Iterator<T> iterator() {
 		return roots.iterator();

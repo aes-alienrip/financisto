@@ -177,7 +177,7 @@ public class MyPreferences {
 
     public static void setLastAccount(Context context, long accountId) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        sharedPreferences.edit().putLong("last_account_id", accountId).apply();
+        sharedPreferences.edit().putLong("last_account_id", accountId).commit();
     }
 
     public static boolean isRememberAccount(Context context) {
@@ -446,6 +446,16 @@ public class MyPreferences {
         return sharedPreferences.getBoolean("show_running_balance", true);
     }
 
+    public static boolean isBlotterAlternateColors(Context context) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return sharedPreferences.getBoolean("alternate_blotter_rows", true);
+    }
+
+    public static boolean isAccountAlternateColors(Context context) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return sharedPreferences.getBoolean("alternate_account_rows", true);
+    }
+
     private static final String DEFAULT = "default";
 
     public static Context switchLocale(Context context) {
@@ -529,19 +539,19 @@ public class MyPreferences {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         boolean result = sharedPreferences.getBoolean(name, true);
         if (result) {
-            sharedPreferences.edit().putBoolean(name, false).apply();
+            sharedPreferences.edit().putBoolean(name, false).commit();
         }
         return result;
     }
 
     public static String getDatabaseBackupFolder(Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return sharedPreferences.getString("database_backup_folder", Export.DEFAULT_EXPORT_PATH.getAbsolutePath());
+        return sharedPreferences.getString("database_backup_folder", Export.getDefaultBackupFolder(context).getAbsolutePath());
     }
 
     public static void setDatabaseBackupFolder(Context context, String databaseBackupFolder) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        sharedPreferences.edit().putString("database_backup_folder", databaseBackupFolder).apply();
+        sharedPreferences.edit().putString("database_backup_folder", databaseBackupFolder).commit();
     }
 
     public static String[] getReportPreferences(Context context) {

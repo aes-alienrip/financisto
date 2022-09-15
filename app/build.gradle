@@ -3,20 +3,20 @@ repositories {
     google()
     jcenter()
     maven { url 'https://jitpack.io' }
+    mavenCentral()
 }
 
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion '30.0.3'
+    compileSdkVersion 33
 
     defaultConfig {
-        applicationId "fi.lasicaine.myfinancisto"
-        minSdkVersion 19
-        targetSdkVersion 30
-        versionCode 122
-        versionName "1.8.3"
+        applicationId "fi.lasicaine.financisto"
+        minSdk 19
+        targetSdk 33
+        versionCode 14
+        versionName "2.0.3"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         javaCompileOptions {
@@ -35,19 +35,11 @@ android {
         }
     }
 
-    dexOptions {
-        javaMaxHeapSize "2g"
-    }
-
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
-    lintOptions {
-        checkReleaseBuilds false
-        abortOnError false
-    }
 
     testOptions {
         unitTests {
@@ -61,55 +53,52 @@ android {
             resources.srcDirs += ['src/test/resources']
         }
     }
-
     packagingOptions {
-        exclude 'META-INF/DEPENDENCIES.txt'
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/NOTICE.txt'
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/DEPENDENCIES'
-        exclude 'META-INF/notice.txt'
-        exclude 'META-INF/license.txt'
-        exclude 'META-INF/dependencies.txt'
-        exclude 'META-INF/LGPL2.1'
+        resources {
+            excludes += ['META-INF/DEPENDENCIES.txt', 'META-INF/LICENSE', 'META-INF/LICENSE.txt', 'META-INF/NOTICE.txt', 'META-INF/NOTICE', 'META-INF/LICENSE', 'META-INF/DEPENDENCIES', 'META-INF/notice.txt', 'META-INF/license.txt', 'META-INF/dependencies.txt', 'META-INF/LGPL2.1']
+        }
+    }
+
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
     }
 }
 
-def AAVersion = '4.6.0'
+def AAVersion = '4.8.0'
 
 dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'androidx.multidex:multidex:2.0.1'
+
+    annotationProcessor "org.androidannotations:androidannotations:$AAVersion"
+    implementation "org.androidannotations:androidannotations-api:$AAVersion"
+
+    implementation 'com.google.code.gson:gson:2.9.1'
+    implementation 'net.sf.trove4j:trove4j:3.0.3'
+
+    implementation 'com.dropbox.core:dropbox-core-sdk:3.0.8'
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
+    implementation 'com.squareup.okio:okio:3.2.0'
+    implementation 'org.greenrobot:eventbus:3.3.1'
+    implementation 'com.wdullaer:materialdatetimepicker:3.6.4'
+    implementation 'commons-io:commons-io:2.5'
+    implementation 'com.mtramin:rxfingerprint:2.2.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.21'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'org.reactivestreams:reactive-streams:1.0.4'
+    implementation 'com.mlsdev.rximagepicker:library:2.1.5'
+    implementation 'com.github.bumptech.glide:glide:4.13.2'
 
     implementation "com.google.android.gms:play-services-base:11.0.2"
     implementation "com.google.android.gms:play-services-drive:11.0.2"
     implementation "com.google.android.gms:play-services-plus:11.0.2"
 
-    annotationProcessor "org.androidannotations:androidannotations:$AAVersion"
-    implementation "org.androidannotations:androidannotations-api:$AAVersion"
-
-    implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'net.sf.trove4j:trove4j:3.0.3'
-
-    implementation 'com.dropbox.core:dropbox-core-sdk:3.0.8'
-    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
-    implementation 'com.squareup.okio:okio:2.8.0'
-    implementation 'org.greenrobot:eventbus:3.1.1'
-    implementation 'com.wdullaer:materialdatetimepicker:3.6.4'
-    implementation 'commons-io:commons-io:2.5'
-    implementation 'com.mtramin:rxfingerprint:2.2.1'
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.2'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
-    implementation 'org.reactivestreams:reactive-streams:1.0.2'
-    implementation 'com.mlsdev.rximagepicker:library:2.1.5'
-    implementation 'com.github.bumptech.glide:glide:4.10.0'
-
     implementation fileTree(include: '**/*.jar', dir: 'libs')
 
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'androidx.test:core:1.3.0'
-    testImplementation 'org.robolectric:robolectric:4.2.1'
+    testImplementation 'androidx.test:core:1.4.0'
+    testImplementation 'org.robolectric:robolectric:4.8.2'
+    testImplementation 'org.hamcrest:hamcrest:2.2'
 }

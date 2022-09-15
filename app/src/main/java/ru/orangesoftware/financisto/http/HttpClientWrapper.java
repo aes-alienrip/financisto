@@ -14,7 +14,6 @@ import okhttp3.Response;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.Objects;
 
 /**
  * Created with IntelliJ IDEA.
@@ -37,12 +36,12 @@ public class HttpClientWrapper {
 
     public String getAsString(String url) throws Exception {
         Response response = get(url);
-        return Objects.requireNonNull(response.body()).string();
+        return response.body().string();
     }
 
     public String getAsStringIfOk(String url) throws Exception {
         Response response = get(url);
-        String s = Objects.requireNonNull(response.body()).string();
+        String s = response.body().string();
         if (response.isSuccessful()) {
             return s;
         } else {

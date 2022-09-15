@@ -1,13 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2010 Denis Solonenko.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v2.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- *
- * Contributors:
- *     Denis Solonenko - initial API and implementation
- ******************************************************************************/
 package ru.orangesoftware.financisto.recur;
 
 import com.google.ical.util.TimeUtils;
@@ -22,6 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Objects;
 
 import ru.orangesoftware.financisto.datetime.DateUtils;
 
@@ -56,14 +47,14 @@ public class RecurrencePeriod {
         HashMap<String, String> state = RecurrenceViewFactory.parseState(params);
         switch (until) {
             case EXACTLY_TIMES:
-                int count = Integer.parseInt(state.get(RecurrenceViewFactory.P_COUNT));
+                int count = Integer.parseInt(Objects.requireNonNull(state.get(RecurrenceViewFactory.P_COUNT)));
                 r.setCount(count);
                 break;
             case STOPS_ON_DATE:
                 Calendar c = Calendar.getInstance();
                 String stopsOnDate = state.get(RecurrenceViewFactory.P_DATE);
                 try {
-                    c.setTime(DateUtils.FORMAT_DATE_RFC_2445.parse(stopsOnDate));
+                    c.setTime(Objects.requireNonNull(DateUtils.FORMAT_DATE_RFC_2445.parse(stopsOnDate)));
                     c.set(Calendar.HOUR_OF_DAY, startDate.get(Calendar.HOUR_OF_DAY));
                     c.set(Calendar.MINUTE, startDate.get(Calendar.MINUTE));
                     c.set(Calendar.SECOND, startDate.get(Calendar.SECOND));

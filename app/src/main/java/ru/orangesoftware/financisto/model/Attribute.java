@@ -25,7 +25,7 @@ import static ru.orangesoftware.orb.EntityManager.DEF_SORT_COL;
 @Table(name = ATTRIBUTES_TABLE)
 public class Attribute extends MyEntity implements SortableEntity {
 
-    private static final int DELETE_AFTER_EXPIRED_ID = -1;
+    public static final int DELETE_AFTER_EXPIRED_ID = -1;
 
     public static Attribute deleteAfterExpired() {
         Attribute attribute = new Attribute();

@@ -15,8 +15,6 @@ import android.content.Context;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 
-import java.util.Objects;
-
 import ru.orangesoftware.financisto.adapter.EntityEnumAdapter;
 
 public abstract class EnumUtils {
@@ -72,7 +70,7 @@ public abstract class EnumUtils {
 	public static <E extends Enum> E selectEnum(Class<E> enumType, String enumValue, E defaultValue) {
 		if (enumValue == null) return defaultValue;
 		E[] constants = enumType.getEnumConstants();
-		for (E e : Objects.requireNonNull(constants)) {
+		for (E e : constants) {
 			if (enumValue.equals(e.name())) return e;
 		}
 		return defaultValue;
