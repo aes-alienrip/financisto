@@ -35,7 +35,7 @@ public final class Backup {
 
     public static String[] listBackups(Context context) {
         File backupPath = Export.getBackupFolder(context);
-        String[] files = backupPath.list((dir, filename) -> filename.endsWith(".backup"));
+        String[] files = backupPath.list();
         if (files != null) {
             Arrays.sort(files, (s1, s2) -> s2.compareTo(s1));
             return files;

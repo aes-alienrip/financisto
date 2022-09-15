@@ -12,11 +12,11 @@ android {
     compileSdkVersion 33
 
     defaultConfig {
-        applicationId "fi.lasicaine.myfinancisto"
+        applicationId "fi.lasicaine.financisto"
         minSdk 19
         targetSdk 33
-        versionCode 122
-        versionName "1.8.3"
+        versionCode 14
+        versionName "2.0.3"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         javaCompileOptions {
@@ -72,10 +72,6 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'androidx.multidex:multidex:2.0.1'
 
-    implementation "com.google.android.gms:play-services-base:11.0.2"
-    implementation "com.google.android.gms:play-services-drive:11.0.2"
-    implementation "com.google.android.gms:play-services-plus:11.0.2"
-
     annotationProcessor "org.androidannotations:androidannotations:$AAVersion"
     implementation "org.androidannotations:androidannotations-api:$AAVersion"
 
@@ -95,9 +91,14 @@ dependencies {
     implementation 'com.mlsdev.rximagepicker:library:2.1.5'
     implementation 'com.github.bumptech.glide:glide:4.13.2'
 
+    implementation "com.google.android.gms:play-services-base:11.0.2"
+    implementation "com.google.android.gms:play-services-drive:11.0.2"
+    implementation "com.google.android.gms:play-services-plus:11.0.2"
+
     implementation fileTree(include: '**/*.jar', dir: 'libs')
 
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'androidx.test:core:1.4.0'
     testImplementation 'org.robolectric:robolectric:4.8.2'
+    testImplementation 'org.hamcrest:hamcrest:2.2'
 }

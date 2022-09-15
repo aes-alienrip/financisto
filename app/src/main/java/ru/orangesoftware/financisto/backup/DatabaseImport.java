@@ -13,6 +13,7 @@ package ru.orangesoftware.financisto.backup;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
 import android.util.Log;
 
 import com.dropbox.core.util.IOUtil;
@@ -50,9 +51,10 @@ public class DatabaseImport extends FullDatabaseImport {
     private final InputStream backupStream;
 
     public static DatabaseImport createFromFileBackup(Context context, DatabaseAdapter dbAdapter, String backupFile) throws FileNotFoundException {
-        File backupPath = Export.getBackupFolder(context);
+/*        File backupPath = Export.getBackupFolder(context);
         File file = new File(backupPath, backupFile);
-        FileInputStream inputStream = new FileInputStream(file);
+        FileInputStream inputStream = new FileInputStream(file);*/
+        InputStream inputStream = context.getContentResolver().openInputStream((Uri.parse(backupFile)));
         return new DatabaseImport(context, dbAdapter, inputStream);
     }
 

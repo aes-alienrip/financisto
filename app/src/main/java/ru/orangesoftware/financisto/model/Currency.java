@@ -11,8 +11,6 @@
  ******************************************************************************/
 package ru.orangesoftware.financisto.model;
 
-import org.jetbrains.annotations.NotNull;
-
 import ru.orangesoftware.financisto.utils.CurrencyCache;
 
 import javax.persistence.Column;
@@ -69,8 +67,7 @@ public class Currency extends MyEntity implements SortableEntity {
     @Transient
 	private volatile DecimalFormat format;
 
-    @NotNull
-	@Override
+    @Override
     public String toString() {
         return name;
     }

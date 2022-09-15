@@ -389,7 +389,7 @@ public class Report2DChartView extends View {
 
         pointsShapes = new ShapeDrawable[2 * points.size()];
         int x;
-        double y;
+        Double y;
         double value;
 
         double mean = 0;

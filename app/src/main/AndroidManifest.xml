@@ -30,12 +30,15 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="29"/>
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <!-- <uses-permission android:name="android.permission.RECEIVE_SMS" /> -->
+    <uses-permission android:name="android.permission.USE_BIOMETRIC " />
+    <uses-permission android:name="com.android.vending.BILLING" />
 
     <application
         android:name=".app.FinancistoApp_"
@@ -87,8 +90,7 @@
 
         <receiver
             android:name=".activity.ScheduledAlarmReceiver"
-            android:exported="true"
-            android:permission="TODO">
+            android:exported="true">
             <intent-filter>
                 <action android:name=".SCHEDULED_ALARM" />
                 <action android:name=".SCHEDULED_BACKUP" />
@@ -425,6 +427,7 @@
             android:name=".activity.CsvExportActivity"
             android:exported="true"
             android:label="@string/csv_export" />
+
         <activity
             android:name=".activity.CsvImportActivity"
             android:exported="true"
@@ -434,6 +437,7 @@
             android:name=".activity.QifExportActivity"
             android:exported="true"
             android:label="@string/qif_export" />
+
         <activity
             android:name=".activity.QifImportActivity"
             android:exported="true"
@@ -443,6 +447,7 @@
             android:name=".activity.MonthlyViewActivity"
             android:exported="true"
             android:label="@string/monthly_view" />
+
         <activity
             android:name=".activity.CCardStatementClosingDayActivity"
             android:exported="true"
@@ -452,14 +457,17 @@
             android:name=".activity.Report2DChartActivity"
             android:exported="true"
             android:label="@string/report" />
+
         <activity
             android:name=".activity.ReportPreferencesActivity"
             android:exported="true"
             android:label="@string/report_preferences" />
+
         <activity
             android:name=".activity.AboutActivity"
             android:exported="true"
             android:label="@string/about" />
+
         <activity
             android:name=".activity.WebViewActivity"
             android:exported="true"
@@ -469,6 +477,7 @@
             android:name=".activity.SplitTransactionActivity"
             android:exported="true"
             android:label="@string/split_transaction" />
+
         <activity
             android:name=".activity.SplitTransferActivity"
             android:exported="true"
@@ -478,6 +487,7 @@
             android:name=".dialog.FolderBrowser"
             android:exported="true"
             android:label="@string/select_folder" />
+
         <activity
             android:name=".activity.CategorySelectorActivity"
             android:exported="true"
