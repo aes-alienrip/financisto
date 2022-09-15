@@ -1,4 +1,3 @@
-// noinspection GradleCompatible
 repositories {
     google()
     jcenter()
@@ -9,14 +8,15 @@ repositories {
 apply plugin: 'com.android.application'
 
 android {
+    namespace 'ru.orangesoftware.financisto'
     compileSdkVersion 33
 
     defaultConfig {
         applicationId "fi.lasicaine.financisto"
         minSdk 19
         targetSdk 33
-        versionCode 14
-        versionName "2.0.3"
+        versionCode 123
+        versionName "1.8.5"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         javaCompileOptions {
