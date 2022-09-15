@@ -13,6 +13,7 @@ package ru.orangesoftware.financisto.backup;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
 import android.util.Log;
 
 import com.dropbox.core.util.IOUtil;
@@ -26,6 +27,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PushbackInputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -49,9 +51,10 @@ public class DatabaseImport extends FullDatabaseImport {
     private final InputStream backupStream;
 
     public static DatabaseImport createFromFileBackup(Context context, DatabaseAdapter dbAdapter, String backupFile) throws FileNotFoundException {
-        File backupPath = Export.getBackupFolder(context);
+/*        File backupPath = Export.getBackupFolder(context);
         File file = new File(backupPath, backupFile);
-        FileInputStream inputStream = new FileInputStream(file);
+        FileInputStream inputStream = new FileInputStream(file);*/
+        InputStream inputStream = context.getContentResolver().openInputStream((Uri.parse(backupFile)));
         return new DatabaseImport(context, dbAdapter, inputStream);
     }
 
@@ -78,7 +81,7 @@ public class DatabaseImport extends FullDatabaseImport {
     @Override
     protected void restoreDatabase() throws IOException {
         InputStream s = decompressStream(backupStream);
-        InputStreamReader isr = new InputStreamReader(s, "UTF-8");
+        InputStreamReader isr = new InputStreamReader(s, StandardCharsets.UTF_8);
         BufferedReader br = new BufferedReader(isr, 65535);
         try {
             recoverDatabase(br);

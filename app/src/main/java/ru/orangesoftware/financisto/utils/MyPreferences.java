@@ -446,6 +446,16 @@ public class MyPreferences {
         return sharedPreferences.getBoolean("show_running_balance", true);
     }
 
+    public static boolean isBlotterAlternateColors(Context context) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return sharedPreferences.getBoolean("alternate_blotter_rows", true);
+    }
+
+    public static boolean isAccountAlternateColors(Context context) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return sharedPreferences.getBoolean("alternate_account_rows", true);
+    }
+
     private static final String DEFAULT = "default";
 
     public static Context switchLocale(Context context) {
@@ -536,7 +546,7 @@ public class MyPreferences {
 
     public static String getDatabaseBackupFolder(Context context) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return sharedPreferences.getString("database_backup_folder", Export.DEFAULT_EXPORT_PATH.getAbsolutePath());
+        return sharedPreferences.getString("database_backup_folder", Export.getDefaultBackupFolder(context).getAbsolutePath());
     }
 
     public static void setDatabaseBackupFolder(Context context, String databaseBackupFolder) {

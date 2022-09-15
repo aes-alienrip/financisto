@@ -1,16 +1,5 @@
-/*******************************************************************************
- * Copyright (c) 2010 Denis Solonenko.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v2.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- * <p/>
- * Contributors:
- * Denis Solonenko - initial API and implementation
- ******************************************************************************/
 package ru.orangesoftware.financisto.export;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Environment;
@@ -23,20 +12,18 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.zip.GZIPOutputStream;
 
-import ru.orangesoftware.financisto.R;
-import ru.orangesoftware.financisto.activity.RequestPermission;
-import ru.orangesoftware.financisto.export.drive.GoogleDriveClient;
-import ru.orangesoftware.financisto.export.drive.GoogleDriveClient_;
+import ru.orangesoftware.financisto.export.drive.GoogleDriveClientV3;
+import ru.orangesoftware.financisto.export.drive.GoogleDriveClientV3_;
 import ru.orangesoftware.financisto.export.dropbox.Dropbox;
 import ru.orangesoftware.financisto.utils.MyPreferences;
 
 public abstract class Export {
 
-    public static final File DEFAULT_EXPORT_PATH = Environment.getExternalStoragePublicDirectory("financisto");
     public static final String BACKUP_MIME_TYPE = "application/x-gzip";
 
     private final Context context;
@@ -48,9 +35,6 @@ public abstract class Export {
     }
 
     public String export() throws Exception {
-        if (!RequestPermission.checkPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            throw new ImportExportException(R.string.request_permissions_storage_not_granted);
-        }
         File path = getBackupFolder(context);
         String fileName = generateFilename();
         File file = new File(path, fileName);
@@ -85,7 +69,7 @@ public abstract class Export {
     }
 
     private void generateBackup(OutputStream outputStream) throws Exception {
-        OutputStreamWriter osw = new OutputStreamWriter(outputStream, "UTF-8");
+        OutputStreamWriter osw = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
         try (BufferedWriter bw = new BufferedWriter(osw, 65536)) {
             writeHeader(bw);
             writeBody(bw);
@@ -101,6 +85,14 @@ public abstract class Export {
 
     protected abstract String getExtension();
 
+    // FIXME: After Q, top directory is not allowed, put it in Download folder first.
+    // We should use MediaStore to access public directory but it needs bunches of changes.
+    public static File getDefaultBackupFolder(Context context) {
+        // return context.getExternalFilesDir("backup");
+        File base = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+        return new File(base, "financisto");
+    }
+
     public static File getBackupFolder(Context context) {
         String path = MyPreferences.getDatabaseBackupFolder(context);
         File file = new File(path);
@@ -108,7 +100,7 @@ public abstract class Export {
         if (file.isDirectory() && file.canWrite()) {
             return file;
         }
-        file = Export.DEFAULT_EXPORT_PATH;
+        file = getDefaultBackupFolder(context);
         file.mkdirs();
         return file;
     }
@@ -126,7 +118,7 @@ public abstract class Export {
 
     public static void uploadBackupFileToGoogleDrive(Context context, String backupFileName) throws Exception {
         File file = getBackupFile(context, backupFileName);
-        GoogleDriveClient driveClient = GoogleDriveClient_.getInstance_(context);
+        GoogleDriveClientV3 driveClient = GoogleDriveClientV3_.getInstance_(context);
         driveClient.uploadFile(file);
     }
 

@@ -8,27 +8,42 @@
 
 package ru.orangesoftware.financisto.activity;
 
+import static java.util.Objects.requireNonNull;
+import static ru.orangesoftware.financisto.model.Category.NO_CATEGORY_ID;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.text.InputType;
 import android.view.View;
-import android.widget.*;
+import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 import ru.orangesoftware.financisto.R;
 import ru.orangesoftware.financisto.db.DatabaseAdapter;
 import ru.orangesoftware.financisto.db.DatabaseHelper;
-import ru.orangesoftware.financisto.model.*;
+import ru.orangesoftware.financisto.model.Attribute;
+import ru.orangesoftware.financisto.model.Category;
+import ru.orangesoftware.financisto.model.MultiChoiceItem;
+import ru.orangesoftware.financisto.model.MyEntity;
+import ru.orangesoftware.financisto.model.Transaction;
+import ru.orangesoftware.financisto.model.TransactionAttribute;
 import ru.orangesoftware.financisto.utils.ArrUtils;
 import ru.orangesoftware.financisto.utils.TransactionUtils;
 import ru.orangesoftware.financisto.utils.Utils;
 import ru.orangesoftware.financisto.view.AttributeView;
 import ru.orangesoftware.financisto.view.AttributeViewFactory;
-
-import java.util.*;
-
-import static java.util.Objects.requireNonNull;
-import static ru.orangesoftware.financisto.model.Category.NO_CATEGORY_ID;
 
 public class CategorySelector<A extends AbstractActivity> {
 
@@ -196,11 +211,7 @@ public class CategorySelector<A extends AbstractActivity> {
     public void onClick(int id) {
         switch (id) {
             case R.id.category:
-                if (isListPick()) {
-                    pickCategory();
-                } else {
-                    showFilter();
-                }
+                pickCategory();
                 break;
             case R.id.category_show_list:
                 pickCategory();
