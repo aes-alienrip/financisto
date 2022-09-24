@@ -13,11 +13,6 @@ import ru.orangesoftware.financisto.model.Account;
 import ru.orangesoftware.financisto.utils.TransactionUtils;
 import ru.orangesoftware.financisto.widget.RateLayoutView;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Denis Solonenko
- * Date: 4/21/11 7:17 PM
- */
 public class SplitTransferActivity extends AbstractSplitActivity {
 
     private RateLayoutView rateView;
