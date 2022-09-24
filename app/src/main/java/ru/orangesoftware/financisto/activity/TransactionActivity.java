@@ -10,6 +10,9 @@
  ******************************************************************************/
 package ru.orangesoftware.financisto.activity;
 
+import static ru.orangesoftware.financisto.activity.CategorySelector.SelectorType.TRANSACTION;
+import static ru.orangesoftware.financisto.utils.Utils.isNotEmpty;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,18 +21,33 @@ import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.IdentityHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
 import greendroid.widget.QuickActionGrid;
 import greendroid.widget.QuickActionWidget;
 import ru.orangesoftware.financisto.R;
-import ru.orangesoftware.financisto.model.*;
+import ru.orangesoftware.financisto.model.Account;
+import ru.orangesoftware.financisto.model.Category;
 import ru.orangesoftware.financisto.model.Currency;
-import ru.orangesoftware.financisto.utils.*;
-
-import java.io.*;
-import java.util.*;
-
-import static ru.orangesoftware.financisto.activity.CategorySelector.SelectorType.TRANSACTION;
-import static ru.orangesoftware.financisto.utils.Utils.isNotEmpty;
+import ru.orangesoftware.financisto.model.MyEntity;
+import ru.orangesoftware.financisto.model.Payee;
+import ru.orangesoftware.financisto.model.Transaction;
+import ru.orangesoftware.financisto.utils.CurrencyCache;
+import ru.orangesoftware.financisto.utils.MyPreferences;
+import ru.orangesoftware.financisto.utils.SplitAdjuster;
+import ru.orangesoftware.financisto.utils.TransactionUtils;
+import ru.orangesoftware.financisto.utils.Utils;
 
 public class TransactionActivity extends AbstractTransactionActivity {
 
@@ -96,7 +114,7 @@ public class TransactionActivity extends AbstractTransactionActivity {
         unsplitActionGrid.setOnQuickActionClickListener(unsplitActionListener);
     }
 
-    private QuickActionWidget.OnQuickActionClickListener unsplitActionListener = (widget, position) -> {
+    private final QuickActionWidget.OnQuickActionClickListener unsplitActionListener = (widget, position) -> {
         switch (position) {
             case 0:
                 createSplit(false);
@@ -261,13 +279,6 @@ public class TransactionActivity extends AbstractTransactionActivity {
     }
 
     @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        if (hasFocus) {
-            accountText.requestFocusFromTouch();
-        }
-    }
-
-    @Override
     protected boolean onOKClicked() {
         if (checkSelectedAccount() && checkUnsplitAmount() && checkSelectedEntities()) {
             updateTransactionFromUI();
@@ -407,12 +418,10 @@ public class TransactionActivity extends AbstractTransactionActivity {
     @Override
     public void onSelectedPos(int id, int selectedPos) {
         super.onSelectedPos(id, selectedPos);
-        switch (id) {
-            case R.id.payee:
-                if (isRememberLastCategory) {
-                    selectLastCategoryForPayee(payeeSelector.getSelectedEntityId());
-                }
-                break;
+        if (id == R.id.payee) {
+            if (isRememberLastCategory) {
+                selectLastCategoryForPayee(payeeSelector.getSelectedEntityId());
+            }
         }
     }
 
@@ -626,6 +635,4 @@ public class TransactionActivity extends AbstractTransactionActivity {
         public long idSequence;
         public List<Transaction> splits;
     }
-
-
 }
