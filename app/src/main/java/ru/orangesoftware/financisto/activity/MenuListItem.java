@@ -1,7 +1,12 @@
 package ru.orangesoftware.financisto.activity;
 
-import android.Manifest;
 import static android.Manifest.permission.RECEIVE_SMS;
+import static ru.orangesoftware.financisto.activity.MenuListActivity.IMPORT_BACKUP_DATABASE_FILENAME_REQUEST_CODE;
+import static ru.orangesoftware.financisto.activity.RequestPermission.isRequestingPermission;
+import static ru.orangesoftware.financisto.activity.RequestPermission.isRequestingPermissions;
+import static ru.orangesoftware.financisto.utils.EnumUtils.showPickOneDialog;
+
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -11,25 +16,20 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
-import androidx.core.content.FileProvider;
-
 import android.os.Build;
 import android.widget.ListAdapter;
 import android.widget.Toast;
+
+import androidx.core.content.FileProvider;
+
 import java.io.File;
 import java.util.List;
 
 import ru.orangesoftware.financisto.BuildConfig;
 import ru.orangesoftware.financisto.R;
-
-import static ru.orangesoftware.financisto.activity.MenuListActivity.IMPORT_BACKUP_DATABASE_FILENAME_REQUEST_CODE;
-import static ru.orangesoftware.financisto.activity.RequestPermission.isRequestingPermission;
-import static ru.orangesoftware.financisto.activity.RequestPermission.isRequestingPermissions;
-import ru.orangesoftware.financisto.backup.Backup;
 import ru.orangesoftware.financisto.bus.GreenRobotBus_;
 import ru.orangesoftware.financisto.db.DatabaseAdapter;
 import ru.orangesoftware.financisto.export.BackupExportTask;
-import ru.orangesoftware.financisto.export.BackupImportTask;
 import ru.orangesoftware.financisto.export.Export;
 import ru.orangesoftware.financisto.export.csv.CsvExportOptions;
 import ru.orangesoftware.financisto.export.csv.CsvExportTask;
@@ -41,7 +41,6 @@ import ru.orangesoftware.financisto.export.qif.QifImportOptions;
 import ru.orangesoftware.financisto.export.qif.QifImportTask;
 import ru.orangesoftware.financisto.utils.EntityEnum;
 import ru.orangesoftware.financisto.utils.EnumUtils;
-import static ru.orangesoftware.financisto.utils.EnumUtils.showPickOneDialog;
 import ru.orangesoftware.financisto.utils.ExecutableEntityEnum;
 import ru.orangesoftware.financisto.utils.IntegrityFix;
 import ru.orangesoftware.financisto.utils.SummaryEntityEnum;
@@ -218,20 +217,6 @@ public enum MenuListItem implements SummaryEntityEnum {
         public void call(Activity activity) {
             new IntegrityFixTask(activity).execute();
         }
-    },
-    MENU_DONATE(R.string.donate, R.string.donate_summary, R.drawable.actionbar_donate) {
-        @Override
-        public void call(Activity activity) {
-            try {
-                Intent browserIntent = new Intent("android.intent.action.VIEW",
-                        Uri.parse("market://search?q=pname:ru.orangesoftware.financisto.support"));
-                activity.startActivity(browserIntent);
-            } catch (Exception ex) {
-                //eventually market is not available
-                Toast.makeText(activity, R.string.donate_error, Toast.LENGTH_LONG).show();
-            }
-        }
-
     },
     MENU_ABOUT(R.string.about, R.string.about_summary, R.drawable.ic_action_info) {
         @Override
