@@ -614,11 +614,11 @@
     <string name="create_new_folder">Новая</string>
     <string name="create_new_folder_title">Создать новую папку</string>
     <string name="create_new_folder_fail">Не удалось создать папку</string>
-    <string name="database_backup">Резерв. копирование базы</string>
-    <string name="database_backup_folder">Папка резерв. копии</string>
-    <string name="database_backup_folder_summary">Текущая папка резерв. копии: %s</string>
+    <string name="database_backup">Резервное копирование базы</string>
+    <string name="database_backup_folder">Папка резервной копии</string>
+    <string name="database_backup_folder_summary">Текущая папка резервной копии: %s</string>
     <string name="backup_database_to">Отправить копию базы…</string>
-    <string name="backup_database_to_title">Отправить резерв. копию базы в…</string>
+    <string name="backup_database_to_title">Отправить резервную копию базы в…</string>
     <string name="license">Лицензия</string>
     <string name="quick_menu_account_enabled">Тап-меню для счетов</string>
     <string name="quick_menu_account_enabled_summary">Включить быстрое меню для счетов</string>
