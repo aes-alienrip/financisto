@@ -9,6 +9,7 @@
       Denis Solonenko - initial API and implementation
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
     android:paddingStart="0dip"
@@ -42,5 +43,6 @@
         android:gravity="center_vertical"
         android:singleLine="true"
         android:text="line1"
-        android:textAppearance="?android:attr/textAppearanceLargeInverse"/>
+        android:textAppearance="?android:attr/textAppearanceLargeInverse"
+        tools:ignore="NotSibling" />
 </RelativeLayout>
