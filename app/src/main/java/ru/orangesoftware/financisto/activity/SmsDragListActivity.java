@@ -44,9 +44,6 @@ public class SmsDragListActivity extends AppCompatActivity {
 
         db = new DatabaseAdapter(this);
         db.open();
-        
-//        Toolbar menu = findViewById(R.id.tool_bar);
-//        setSupportActionBar(menu);
 
         recyclerView = findViewById(R.id.drag_list_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
