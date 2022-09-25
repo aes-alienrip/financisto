@@ -12,16 +12,16 @@
     android:id="@+id/layout"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="2dp"
-    android:paddingTop="2dp">
+    android:paddingTop="2dp"
+    android:paddingBottom="2dp">
 
     <TextView
         android:id="@+id/indicator"
         android:layout_width="7dp"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/top"
         android:layout_alignBottom="@+id/bottom"
         android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/top"
         android:layout_centerVertical="true"
         android:layout_marginRight="6dp"
         android:background="@color/unreconciled_transaction_color" />
@@ -30,10 +30,10 @@
         android:id="@+id/right_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/top"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
         android:layout_alignTop="@+id/top"
+        android:layout_alignBottom="@+id/top"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
         android:adjustViewBounds="false"
         android:paddingRight="10dp"
         android:scaleType="fitEnd"
@@ -52,8 +52,8 @@
         android:id="@+id/center"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/top"
         android:layout_below="@+id/top"
+        android:layout_alignLeft="@id/top"
         android:layout_toLeftOf="@+id/right_center"
         android:ellipsize="end"
         android:maxLines="1"
@@ -64,8 +64,8 @@
         android:id="@+id/bottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/center"
         android:layout_below="@id/center"
+        android:layout_alignLeft="@id/center"
         android:maxLines="1"
         android:text="bottom"
         android:textAppearance="?android:attr/textAppearanceSmall" />

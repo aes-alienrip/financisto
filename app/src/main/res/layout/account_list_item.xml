@@ -1,29 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?><!--
-  Copyright (c) 2010 Denis Solonenko.
-  All rights reserved. This program and the accompanying materials
-  are made available under the terms of the GNU Public License v2.0
-  which accompanies this distribution, and is available at
-  http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
-  
-  Contributors:
-      Denis Solonenko - initial API and implementation
--->
+<?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/account_list_item_layout"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/account_list_item_layout"
-    android:paddingBottom="2dp"
     android:paddingLeft="12dp"
+    android:paddingTop="2dp"
     android:paddingRight="12dp"
-    android:paddingTop="2dp">
+    android:paddingBottom="2dp">
 
     <ImageView
         android:id="@+id/icon"
+        style="@style/AccountTypeImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:paddingRight="5dp"
-        style="@style/AccountTypeImage"
         android:src="@drawable/account_type_card_visa" />
 
     <ImageView
@@ -57,16 +49,16 @@
         android:id="@+id/layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/top"
-        android:layout_below="@id/top">
+        android:layout_below="@id/top"
+        android:layout_alignLeft="@id/top">
 
         <TextView
             android:id="@+id/center"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:maxLines="1"
             android:ellipsize="end"
+            android:maxLines="1"
             android:text="center"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -76,17 +68,17 @@
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:gravity="bottom"
-            android:paddingLeft="5dp"
             android:maxLines="1"
-            android:text="right_center"/>
+            android:paddingLeft="5dp"
+            android:text="right_center" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/layout1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/layout"
-        android:layout_below="@id/layout">
+        android:layout_below="@id/layout"
+        android:layout_alignLeft="@id/layout">
 
         <TextView
             android:id="@+id/bottom"
@@ -102,9 +94,9 @@
             style="@style/TextAppearance.BalanceAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="5dp"
             android:maxLines="1"
-            android:text="right"/>
+            android:paddingLeft="5dp"
+            android:text="right" />
     </LinearLayout>
 
     <ProgressBar
@@ -112,9 +104,9 @@
         style="@style/ProgressBarBudget"
         android:layout_width="fill_parent"
         android:layout_height="12dp"
+        android:layout_below="@id/layout1"
         android:layout_alignLeft="@id/layout1"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/layout1"
         android:layout_marginTop="2dp"
         android:max="100"
         android:progress="50" />

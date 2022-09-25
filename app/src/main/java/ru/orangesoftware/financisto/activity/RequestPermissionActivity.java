@@ -4,12 +4,15 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.appcompat.widget.SwitchCompat;
+import android.os.Build;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -61,7 +64,12 @@ public class RequestPermissionActivity extends Activity {
     }
 
     private void checkPermissions() {
-        disableToggleIfGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE, toggleWriteStorage, toggleWriteStorageWrap);
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.R) {
+            disableToggleIfGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE, toggleWriteStorage, toggleWriteStorageWrap);
+        } else {
+            toggleWriteStorageWrap.setVisibility(View.GONE);
+        }
+
         disableToggleIfGranted(Manifest.permission.GET_ACCOUNTS, toggleGetAccounts, toggleGetAccountsWrap);
         disableToggleIfGranted(Manifest.permission.CAMERA, toggleCamera, toggleCameraWrap);
         disableToggleIfGranted(Manifest.permission.RECEIVE_SMS, toggleSms, toggleSmsWrap);

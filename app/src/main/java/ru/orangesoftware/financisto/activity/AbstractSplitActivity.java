@@ -19,11 +19,6 @@ import ru.orangesoftware.financisto.utils.Utils;
 
 import static ru.orangesoftware.financisto.utils.Utils.text;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Denis Solonenko
- * Date: 4/21/11 7:17 PM
- */
 public abstract class AbstractSplitActivity extends AbstractActivity {
 
     protected EditText noteText;
