@@ -1,15 +1,10 @@
-repositories {
-    google()
-    jcenter()
-    maven { url 'https://jitpack.io' }
-    mavenCentral()
+plugins {
+    id 'com.android.application'
 }
-
-apply plugin: 'com.android.application'
 
 android {
     namespace 'ru.orangesoftware.financisto'
-    compileSdkVersion 33
+    compileSdk 33
 
     defaultConfig {
         applicationId "fi.lasicaine.financisto"
@@ -40,7 +35,6 @@ android {
         targetCompatibility JavaVersion.VERSION_11
     }
 
-
     testOptions {
         unitTests {
             returnDefaultValues = true
@@ -53,6 +47,7 @@ android {
             resources.srcDirs += ['src/test/resources']
         }
     }
+
     packagingOptions {
         resources {
             excludes += ['META-INF/DEPENDENCIES.txt', 'META-INF/LICENSE', 'META-INF/LICENSE.txt', 'META-INF/NOTICE.txt', 'META-INF/NOTICE', 'META-INF/LICENSE', 'META-INF/DEPENDENCIES', 'META-INF/notice.txt', 'META-INF/license.txt', 'META-INF/dependencies.txt', 'META-INF/LGPL2.1']
@@ -69,7 +64,7 @@ def AAVersion = '4.8.0'
 
 dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.multidex:multidex:2.0.1'
 
     annotationProcessor "org.androidannotations:androidannotations:$AAVersion"
@@ -98,7 +93,7 @@ dependencies {
     implementation fileTree(include: '**/*.jar', dir: 'libs')
 
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'androidx.test:core:1.4.0'
+    testImplementation 'androidx.test:core:1.5.0'
     testImplementation 'org.robolectric:robolectric:4.8.2'
     testImplementation 'org.hamcrest:hamcrest:2.2'
 }

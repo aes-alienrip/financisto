@@ -7,32 +7,12 @@ buildscript {
         maven { url 'https://jitpack.io' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.0'
-    }
-}
-
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        maven { url 'https://jitpack.io' }
+        classpath 'com.android.tools.build:gradle:7.4.2'
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
-}
-
-project.ext.preDexLibs = !project.hasProperty('disablePreDex')
-
-subprojects {
-    project.plugins.whenPluginAdded { plugin ->
-        if ("com.android.build.gradle.AppPlugin" == plugin.class.name) {
-            project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibs
-        } else if ("com.android.build.gradle.LibraryPlugin" == plugin.class.name) {
-            project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibs
-        }
-    }
 }
 
 tasks.matching {it instanceof Test}.all {
