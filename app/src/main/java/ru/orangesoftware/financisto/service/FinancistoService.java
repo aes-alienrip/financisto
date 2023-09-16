@@ -1,26 +1,26 @@
-/*******************************************************************************
- * Copyright (c) 2010 Denis Solonenko.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v2.0
- * which accompanies this distribution, and is available at
- * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- * <p/>
- * Contributors:
- * Denis Solonenko - initial API and implementation
- ******************************************************************************/
 package ru.orangesoftware.financisto.service;
+
+import static android.app.PendingIntent.FLAG_CANCEL_CURRENT;
+import static android.app.PendingIntent.FLAG_IMMUTABLE;
+import static ru.orangesoftware.financisto.service.DailyAutoBackupScheduler.scheduleNextAutoBackup;
+import static ru.orangesoftware.financisto.service.SmsReceiver.SMS_TRANSACTION_BODY;
+import static ru.orangesoftware.financisto.service.SmsReceiver.SMS_TRANSACTION_NUMBER;
+import static ru.orangesoftware.financisto.utils.MyPreferences.getSmsTransactionStatus;
+import static ru.orangesoftware.financisto.utils.MyPreferences.shouldSaveSmsToTransactionNote;
 
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import static android.app.PendingIntent.FLAG_CANCEL_CURRENT;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.core.app.JobIntentService;
 import androidx.core.app.NotificationCompat;
-import android.util.Log;
+
 import java.util.Date;
+
 import ru.orangesoftware.financisto.R;
 import ru.orangesoftware.financisto.activity.AbstractTransactionActivity;
 import ru.orangesoftware.financisto.activity.AccountWidget;
@@ -34,12 +34,7 @@ import ru.orangesoftware.financisto.model.Transaction;
 import ru.orangesoftware.financisto.model.TransactionInfo;
 import ru.orangesoftware.financisto.model.TransactionStatus;
 import ru.orangesoftware.financisto.recur.NotificationOptions;
-import static ru.orangesoftware.financisto.service.DailyAutoBackupScheduler.scheduleNextAutoBackup;
-import static ru.orangesoftware.financisto.service.SmsReceiver.SMS_TRANSACTION_BODY;
-import static ru.orangesoftware.financisto.service.SmsReceiver.SMS_TRANSACTION_NUMBER;
 import ru.orangesoftware.financisto.utils.MyPreferences;
-import static ru.orangesoftware.financisto.utils.MyPreferences.getSmsTransactionStatus;
-import static ru.orangesoftware.financisto.utils.MyPreferences.shouldSaveSmsToTransactionNote;
 
 public class FinancistoService extends JobIntentService {
 
@@ -108,7 +103,7 @@ public class FinancistoService extends JobIntentService {
         String body = intent.getStringExtra(SMS_TRANSACTION_BODY);
         if (number != null && body != null) {
             Transaction t = smsProcessor.createTransactionBySms(number, body, getSmsTransactionStatus(this),
-                shouldSaveSmsToTransactionNote(this));
+                    shouldSaveSmsToTransactionNote(this));
             if (t != null) {
                 TransactionInfo transactionInfo = db.getTransactionInfo(t.id);
                 if (transactionInfo != null) {
@@ -116,7 +111,7 @@ public class FinancistoService extends JobIntentService {
                     notifyUser(notification, (int) t.id);
                     AccountWidget.updateWidgets(this);
                 } else {
-                    Log.e("Financisto", "Transaction info does not exist for "+t.id);
+                    Log.e("Financisto", "Transaction info does not exist for " + t.id);
                 }
             }
         }
@@ -198,7 +193,7 @@ public class FinancistoService extends JobIntentService {
         WhereFilter filter = new WhereFilter("");
         filter.eq(BlotterFilter.STATUS, TransactionStatus.RS.name());
         filter.toIntent(notificationIntent);
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, FLAG_IMMUTABLE);
 
         return new NotificationCompat.Builder(this, "restored")
                 .setContentIntent(contentIntent)
@@ -231,7 +226,7 @@ public class FinancistoService extends JobIntentService {
     private Notification generateNotification(TransactionInfo t, String tickerText, String contentTitle, String text) {
         Intent notificationIntent = new Intent(this, t.getActivity());
         notificationIntent.putExtra(AbstractTransactionActivity.TRAN_ID_EXTRA, t.id);
-        PendingIntent contentIntent = PendingIntent.getActivity(this, (int) t.id, notificationIntent, FLAG_CANCEL_CURRENT); /* https://stackoverflow.com/a/3730394/365675 */
+        PendingIntent contentIntent = PendingIntent.getActivity(this, (int) t.id, notificationIntent, FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE); /* https://stackoverflow.com/a/3730394/365675 */
 
         Notification notification = new NotificationCompat.Builder(this, "transactions")
                 .setContentIntent(contentIntent)

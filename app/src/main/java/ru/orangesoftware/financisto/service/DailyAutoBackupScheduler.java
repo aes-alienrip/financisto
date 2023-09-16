@@ -12,11 +12,6 @@ import java.util.Date;
 import ru.orangesoftware.financisto.activity.ScheduledAlarmReceiver;
 import ru.orangesoftware.financisto.utils.MyPreferences;
 
-/**
- * Created by IntelliJ IDEA.
- * User: Denis Solonenko
- * Date: 12/16/11 12:54 AM
- */
 public class DailyAutoBackupScheduler {
 
     private final int hh;
@@ -31,7 +26,7 @@ public class DailyAutoBackupScheduler {
             new DailyAutoBackupScheduler(hh, mm, System.currentTimeMillis()).scheduleBackup(context);
         }
     }
-    
+
     DailyAutoBackupScheduler(int hh, int mm, long now) {
         this.hh = hh;
         this.mm = mm;
@@ -49,7 +44,7 @@ public class DailyAutoBackupScheduler {
     private PendingIntent createPendingIntent(Context context) {
         Intent intent = new Intent("ru.orangesoftware.financisto.SCHEDULED_BACKUP");
         intent.setClass(context, ScheduledAlarmReceiver.class);
-        return PendingIntent.getBroadcast(context, -100, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        return PendingIntent.getBroadcast(context, -100, intent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
     }
 
     Date getScheduledTime() {
