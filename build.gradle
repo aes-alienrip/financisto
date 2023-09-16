@@ -7,14 +7,14 @@ buildscript {
         maven { url 'https://jitpack.io' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.4.2'
+        classpath 'com.android.tools.build:gradle:8.1.1'
     }
 }
 
-task clean(type: Delete) {
+tasks.register('clean', Delete) {
     delete rootProject.buildDir
 }
 
-tasks.matching {it instanceof Test}.all {
+tasks.matching {it instanceof Test}.configureEach {
     testLogging.events = ["failed", "passed", "skipped"]
 }
