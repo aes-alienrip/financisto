@@ -7,6 +7,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.TabHost;
+
 import ru.orangesoftware.financisto.R;
 import ru.orangesoftware.financisto.utils.MyPreferences;
 import ru.orangesoftware.financisto.utils.Utils;
@@ -19,9 +20,9 @@ public class AboutActivity extends TabActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState ) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("Financisto ("+getAppVersion(this)+")");
+        setTitle("Financisto (" + getAppVersion(this) + ")");
 
         addTabForFile("whatsnew", R.string.whats_new);
         addTabForFile("gpl-2.0-standalone", R.string.license);
@@ -40,7 +41,7 @@ public class AboutActivity extends TabActivity {
     public static String getAppVersion(Context context) {
         try {
             PackageInfo info = Utils.getPackageInfo(context);
-            return "v. "+info.versionName;
+            return "v. " + info.versionName;
         } catch (PackageManager.NameNotFoundException e) {
             return "";
         }
