@@ -10,8 +10,8 @@ android {
         applicationId "fi.lasicaine.financisto"
         minSdk 19
         targetSdk 34
-        versionCode 125
-        versionName "1.8.7"
+        versionCode 126
+        versionName "1.8.8"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         javaCompileOptions {
@@ -25,11 +25,13 @@ android {
 
     buildTypes {
         debug {
+            resValue("string", "app_name", "Financisto Debug")
             applicationIdSuffix ".debug"
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
+            resValue("string", "app_name", "Financisto")
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
