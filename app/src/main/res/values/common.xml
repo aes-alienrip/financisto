@@ -154,6 +154,8 @@
 	<string name="card_issuer_electron" translatable="false">Visa Electron</string>
 	<string name="card_issuer_mastercard" translatable="false">Mastercard</string>
 	<string name="card_issuer_maestro" translatable="false">Maestro</string>
+	<string name="card_issuer_mir" translatable="false">MIR</string>
+	<string name="card_issuer_mir_supreme" translatable="false">MIR Supreme</string>
 	<string name="card_issuer_amex" translatable="false">AMEX</string>
 	<string name="card_issuer_jcb" translatable="false">JCB</string>
 	<string name="card_issuer_diners" translatable="false">Diners Club</string>
