@@ -10,8 +10,8 @@ android {
         applicationId "fi.lasicaine.financisto"
         minSdk 19
         targetSdk 34
-        versionCode 126
-        versionName "1.8.8"
+        versionCode 127
+        versionName "1.8.9"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         javaCompileOptions {
