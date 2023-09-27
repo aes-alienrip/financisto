@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
+	<string name="app_name" translatable="false">Financisto</string>
 	<string name="app_description">Open-source personal finance tracker</string>
+	<string name="about_copyright1" translatable="false">Released under GNU GPL v2</string>
 	<color name="scheduled">#7cc623</color>
 	<color name="positive_amount">#66bb6a</color>
 	<color name="negative_amount">#ef5350</color>
@@ -25,6 +27,14 @@
 	<dimen name="select_entry_height_no_label">45dp</dimen>
 	<dimen name="title_entry_height">25dp</dimen>
 	<dimen name="amount_picker_width">47dp</dimen>
+	<string-array name="numbers">
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
+		<item>4</item>
+		<item>5</item>
+		<item>6</item>
+	</string-array>
 	<string-array name="decimals">
 		<!-- <item>3</item> -->
 		<item>2</item>
@@ -117,6 +127,10 @@
 		<item>NAME</item>
 		<item>AMOUNT</item>
 	</string-array>
+	<string-array name="sort_blotter_values">
+		<item>DESC</item>
+		<item>ASC</item>
+	</string-array>
 	<string-array name="report_reference_period_values">
 		<item>3</item>
 		<item>6</item>
@@ -172,7 +186,15 @@
         <item>US (MM/dd/yyyy, MM.dd.yy, ...)</item>
     </string-array>
 
-	<string-array name="symbol_formats">
+    <string-array name="unsplit_quick_action_items">
+        <item>@string/add_transaction</item>
+        <item>@string/add_transfer</item>
+        <item>@string/unsplit_adjust_amount_summary</item>
+        <item>@string/unsplit_adjust_evenly_summary</item>
+        <item>@string/unsplit_adjust_last_summary</item>
+    </string-array>
+
+    <string-array name="symbol_formats">
         <item>1 $</item>
         <item>1$</item>
         <item>$ 1</item>
@@ -228,6 +250,7 @@
 
 	<string name="card_issuer_unionpay" translatable="false">UnionPay</string>
     <string name="card_issuer_cirrus" translatable="false">Cirrus</string>
+    <string name="card_issuer_eps" translatable="false">EPS</string>
 
 	<dimen name="list_section_divider_min_height">32dip</dimen>
 
